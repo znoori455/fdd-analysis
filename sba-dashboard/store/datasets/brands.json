@@ -1,0 +1,14 @@
+{
+  "description": "Loans, charge-offs, default rates and risk index for 184 franchise brands, computed from the SBA 7(a) FOIA files for FY1991–1999, FY2000–2009, FY2010–2019 and FY2020–present (statuses as of Sept 30, 2026). Columns ending _w90 include 1990s loans. Median loan sizes (all loans and purchases of existing locations) cover FY2020–2026.",
+  "fixed": true,
+  "source": {
+    "kind": "file",
+    "name": "brands.csv",
+    "url": "/_blob/8423e34450dc3d5af4c80c38e4e17a9b"
+  },
+  "title": "Franchise brand outcomes",
+  "updated": {
+    "at": "2026-11-02T21:55:00-08:00",
+    "by": "Claude, from SBA FOIA files supplied by the user (median loan sizes added)"
+  }
+}

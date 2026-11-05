@@ -1,0 +1,1014 @@
+<meta name="dash-one-writer">
+<style>
+#dash-root { --dash-gutter: var(--cds-pad-lg); }
+.sf { font-family: var(--font-anthropic-sans); color: var(--color-fg); max-width: 1200px; margin-inline: auto; display: flex; flex-direction: column; gap: var(--cds-gap-xl); }
+.sf h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0 0 var(--cds-gap-sm); }
+.sf h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
+.sf h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
+.sf p { margin: 0; line-height: 1.5; }
+.sf .lede { font-size: var(--cds-font-size-body); max-width: 60rem; }
+.sf .lede b, .sf .note b { font-weight: 600; }
+.sf .muted, .sf .note { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.sf .banner { border: 1px solid var(--color-border-line); border-left: 3px solid var(--color-warn); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); background: var(--color-panel); font-size: var(--cds-font-size-caption); line-height: 1.5; }
+.sf .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--cds-gap-md); }
+.sf .tile, .sf .card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); }
+.sf .tile { padding: var(--cds-pad-md) var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+.sf .tile .lab { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.sf .tile .big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; }
+.sf .card .head { margin-bottom: var(--cds-gap-md); }
+.sf .chart { position: relative; width: 100%; }
+.sf .chart svg { display: block; }
+.sf .chart text { font-family: var(--font-anthropic-sans); font-size: var(--cds-font-size-caption); fill: var(--color-fg); }
+.sf .chart .tick { fill: var(--color-fg-muted); }
+.sf .tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); line-height: 1.45; white-space: nowrap; z-index: 2; }
+.sf .tip .t { color: var(--cds-text-secondary); margin-bottom: 2px; }
+.sf .controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); margin-bottom: var(--cds-gap-md); align-items: center; }
+.sf select, .sf input[type=search] { font: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg); background: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); }
+.sf input[type=search] { min-width: min(100%, 16rem); }
+.sf .tablebox { max-height: 34rem; overflow: auto; border-top: 1px solid var(--color-border-line); }
+.sf table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.sf th { position: sticky; top: 0; background: var(--color-panel); text-align: right; font-weight: var(--cds-font-weight-medium); border-bottom: 1px solid var(--color-border-line); padding: 0; vertical-align: bottom; z-index: 1; }
+.sf th:first-child, .sf th.l, .sf td.l { text-align: left; }
+.sf th button { all: unset; cursor: pointer; display: block; width: 100%; box-sizing: border-box; padding: var(--cds-pad-xs) var(--cds-pad-sm); color: var(--color-fg-muted); }
+.sf th span.th { display: block; padding: var(--cds-pad-xs) var(--cds-pad-sm); color: var(--color-fg-muted); }
+.sf th[aria-sort] button { color: var(--color-fg); }
+.sf td { padding: var(--cds-pad-xs) var(--cds-pad-sm); text-align: right; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.sf td:first-child { text-align: left; font-weight: 500; }
+.sf tr.small td { color: var(--color-fg-muted); }
+.sf tr.small td:first-child { font-style: italic; }
+.sf .ri { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); justify-content: flex-end; }
+.sf .ri i { display: inline-block; height: 8px; border-radius: 2px; }
+.sf .good { color: var(--color-ok); } .sf .bad { color: var(--color-bad); }
+.sf .hide-narrow { }
+@media (max-width: 640px) { .sf .hide-narrow { display: none; } }
+.sf .foot { border-top: 1px solid var(--color-border-line); padding-top: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.55; }
+.sf .foot h2 { color: var(--color-fg); }
+.sf .foot ol, .sf .foot ul { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 4px; }
+.sf .foot a { color: var(--color-fg); }
+.sf .legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-sm); }
+.sf .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; background: var(--sw); }
+.sf .tabs { display: flex; gap: var(--cds-gap-xs); border-bottom: 1px solid var(--color-border-line); }
+.sf .tabs button { all: unset; cursor: pointer; padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-body); color: var(--color-fg-muted); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.sf .tabs button[aria-selected=true] { color: var(--color-fg); border-bottom-color: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
+.sf .tabs button:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.sf .panel { display: flex; flex-direction: column; gap: var(--cds-gap-xl); }
+.sf .panel[hidden] { display: none; }
+.sf .pill { display: inline-block; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--color-border-line); font-size: var(--cds-font-size-caption); }
+.sf .pill.v-strong { color: var(--color-ok); border-color: currentColor; }
+.sf .pill.v-weak { color: var(--color-bad); border-color: currentColor; }
+.sf .pill.v-mid { color: var(--color-warn); border-color: currentColor; }
+.sf .keep ul { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 6px; font-size: var(--cds-font-size-caption); line-height: 1.5; }
+.sf .keep b { font-weight: 600; }
+.sf .tablebox.wide { max-height: none; overflow-x: auto; }
+.sf #industries td.l { white-space: normal; min-width: 12rem; }
+.sf td.wrapcell { white-space: normal; min-width: 14rem; }
+.sf td.lowconf { color: var(--color-fg-muted); }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+[data-dash-source-state=empty] { color: transparent; }
+.sf .fail { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 8rem; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.sf #panel-504 td.wrapcell { min-width: 12rem; }
+.sf .tiles .tile .lab b { font-weight: 600; }
+.sf:not(.w90) .c90, .sf.w90 .n90 { display: none !important; }
+.sf .era { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cds-gap-sm) var(--cds-gap-md); padding: var(--cds-pad-sm) var(--cds-pad-md); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-panel); font-size: var(--cds-font-size-caption); }
+.sf .era label { display: inline-flex; align-items: center; gap: var(--cds-gap-sm); cursor: pointer; font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); }
+.sf .era input { appearance: none; -webkit-appearance: none; margin: 0; width: 34px; height: 20px; border-radius: 999px; background: var(--cds-chart-muted); position: relative; cursor: pointer; flex: none; transition: background var(--cds-dur-slow); }
+.sf .era input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--color-bg); transition: transform var(--cds-dur-slow); }
+.sf .era input:checked { background: var(--color-fg); }
+.sf .era input:checked::after { transform: translateX(14px); }
+.sf .era input:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.sf .era .muted b { font-weight: 600; color: var(--color-fg); }
+.sf .fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+</style>
+
+<div class="sf">
+  <header>
+    <h1>SBA franchise default rates, <span class="n90">2000–2026</span><span class="c90">1991–2026</span></h1>
+    <p class="lede">Across 26 years of SBA 7(a) loans, Christian Brothers Automotive had <b data-draw="cb-def" data-source="brands" data-field="total_defaults" data-where="brand=Christian Brothers Automotive">—</b> defaults in <b data-draw="cb-loans" data-source="brands" data-field="total_loans" data-where="brand=Christian Brothers Automotive">—</b> loans, the cleanest record of any brand checked. Outside auto, home care, child care and resale retail held up best through the 2008 recession, while most auto repair franchises defaulted more often than average.</p>
+  </header>
+
+  <div class="banner"><b>How to use this:</b> a screening tool built from public SBA loan records, not an official rating or a prediction for any business. Most loans were for opening new locations, so buying an established, profitable unit is generally lower risk than these rates suggest. Always check a brand's Franchise Disclosure Document and talk to current owners. Not financial advice.</div>
+
+  <div class="era" id="era">
+    <label><input type="checkbox" class="sf-w90" role="switch" aria-describedby="era-note"> Include 1990s loans (FY1991–1999)</label>
+    <span class="muted n90" id="era-note">Off: figures use loans made 2000–2026. Turn on to add 1990s 7(a) loans to the 7(a) tabs.</span>
+    <span class="muted c90">On: 1990s loans are added to every 7(a) figure that has them. They charged off at <b data-draw="base" data-source="baselines" data-field="rate" data-where="period=1991–1999">—</b>, against <b data-draw="base" data-source="baselines" data-field="rate" data-where="period=2000–2009">—</b> for 2000s loans, so the risk index weighs each decade against its own average.</span>
+  </div>
+
+  <nav class="tabs" role="tablist" aria-label="Views">
+    <button type="button" role="tab" class="sf-tab" data-tab="panel-brands" aria-selected="true">Franchise brands</button>
+    <button type="button" role="tab" class="sf-tab" data-tab="panel-industries" aria-selected="false">Your industries</button>
+    <button type="button" role="tab" class="sf-tab" data-tab="panel-all" aria-selected="false">All industries</button>
+    <button type="button" role="tab" class="sf-tab" data-tab="panel-504" aria-selected="false">SBA 504 loans</button>
+  </nav>
+
+  <div class="panel" id="panel-brands" role="tabpanel">
+  <section>
+    <h2>Average default rate, all SBA 7(a) loans</h2>
+    <p class="note" style="margin-bottom: var(--cds-gap-md)">The share of loans charged off. The 2000s were far worse for everyone, so compare brands with the risk index, which adjusts for each decade.</p>
+    <div class="tiles">
+      <div class="tile c90"><span class="lab">Loans made 1991–1999</span><span class="big" data-draw="base" data-source="baselines" data-field="rate" data-where="period=1991–1999">—</span><span class="lab">Resolved loans</span></div>
+      <div class="tile"><span class="lab">Loans made 2000–2009</span><span class="big" data-draw="base" data-source="baselines" data-field="rate" data-where="period=2000–2009">—</span><span class="lab">Resolved loans</span></div>
+      <div class="tile"><span class="lab">Loans made 2005–2008</span><span class="big" data-draw="base" data-source="baselines" data-field="rate" data-where="period=2005–2008 recession vintages">—</span><span class="lab">Through the Great Recession</span></div>
+      <div class="tile"><span class="lab">Loans made 2010–2019</span><span class="big" data-draw="base" data-source="baselines" data-field="rate" data-where="period=2010–2019">—</span><span class="lab">Resolved loans</span></div>
+      <div class="tile"><span class="lab">Loans made 2020–2026</span><span class="big" data-draw="base" data-source="baselines" data-field="rate" data-where="period=2020–2026 (to date)">—</span><span class="lab">So far; still young loans</span></div>
+    </div>
+  </section>
+
+  <section class="card" id="auto">
+    <div class="head">
+      <h2>Auto franchises by risk index</h2>
+      <p class="note">Actual defaults ÷ defaults expected at each decade's average, across <span class="n90">2000–2026</span><span class="c90">1991–2026</span>. 1.0 = average; below 1 is better. Faded bars have fewer than 40 seasoned loans (<span class="n90">2000–2019</span><span class="c90">1991–2019</span>), so treat them loosely.</p>
+    </div>
+    <div class="chart" data-draw="autochart" data-source="brands" style="min-height: 520px"></div>
+  </section>
+
+  <section class="card" id="brands">
+    <div class="head">
+      <h2>All 184 brands</h2>
+      <p class="note">Click a column to sort. Default rate = loans charged off ÷ loans. 2000s and 2010s count resolved loans (paid off or charged off); 2020–26 is charge-offs to date ÷ all disbursed loans. Italic rows have fewer than 40 seasoned loans. Brands in the "Newer brands" category made almost all their loans after 2020, so they get no risk index yet: their low default counts mostly reflect how young the loans are.<span class="c90"> 1990s columns count resolved loans made FY1991–1999; brands founded later show 0.</span> <b>Median loan to buy</b> is the median SBA 7(a) loan to buy an existing location, 2020–26, with the number of those loans beside it; grey figures rest on fewer than 10 loans, so treat them as rough. The loan is typically 85–90% of the full price.</p>
+    </div>
+    <div class="controls">
+      <select data-draw="catselect" data-source="brands" aria-label="Category"></select>
+      <input type="search" class="sf-search" placeholder="Search brands" aria-label="Search brands">
+    </div>
+    <div class="tablebox">
+      <table data-source="brands" data-row-key="brand">
+        <thead><tr>
+          <th data-field="brand" class="l"><button type="button" data-sort="brand">Brand</button></th>
+          <th data-field="category" class="l hide-narrow"><button type="button" data-sort="category">Category</button></th>
+          <th data-field="loans_1990s" class="hide-narrow c90"><button type="button" data-sort="loans_1990s">Loans 1990s</button></th>
+          <th data-field="rate_1990s" class="c90"><button type="button" data-sort="rate_1990s">Default 1990s</button></th>
+          <th data-field="loans_2000s" class="hide-narrow"><button type="button" data-sort="loans_2000s">Loans 2000s</button></th>
+          <th data-field="rate_2000s"><button type="button" data-sort="rate_2000s">Default 2000s</button></th>
+          <th data-field="rate_2005_08" class="hide-narrow"><button type="button" data-sort="rate_2005_08">Default 2005–08</button></th>
+          <th data-field="loans_2010s" class="hide-narrow"><button type="button" data-sort="loans_2010s">Loans 2010s</button></th>
+          <th data-field="rate_2010s"><button type="button" data-sort="rate_2010s">Default 2010s</button></th>
+          <th data-field="loans_2020s" class="hide-narrow"><button type="button" data-sort="loans_2020s">Loans 2020–26</button></th>
+          <th data-field="rate_2020s" class="hide-narrow"><button type="button" data-sort="rate_2020s">Default 2020–26</button></th>
+          <th data-field="total_loans" class="hide-narrow n90"><button type="button" data-sort="total_loans">Total loans</button></th>
+          <th data-field="total_loans_w90" class="hide-narrow c90"><button type="button" data-sort="total_loans_w90">Total loans</button></th>
+          <th data-field="aggregate_rate" class="n90"><button type="button" data-sort="aggregate_rate">All decades</button></th>
+          <th data-field="aggregate_rate_w90" class="c90"><button type="button" data-sort="aggregate_rate_w90">All decades</button></th>
+          <th data-field="risk_index" class="n90" aria-sort="ascending"><button type="button" data-sort="risk_index">Risk index</button></th>
+          <th data-field="risk_index_w90" class="c90"><button type="button" data-sort="risk_index_w90">Risk index</button></th>
+          <th data-field="median_purchase_loan"><button type="button" data-sort="median_purchase_loan">Median loan to buy</button></th>
+          <th data-field="purchase_loans"><button type="button" data-sort="purchase_loans">Purchase loans</button></th>
+          <th data-field="median_loan_2020s" class="hide-narrow"><button type="button" data-sort="median_loan_2020s">Median loan, all 2020–26</button></th>
+        </tr></thead>
+        <tbody data-draw="brandrows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); gap: var(--cds-gap-md);">
+    <section class="card" id="sizes">
+      <div class="head">
+        <h2>Business purchases: default rate by loan size</h2>
+        <p class="note">Change-of-ownership loans only. For 2020–23 loans, risk falls steadily as loans get larger and levels off above $1M; those loans are still young, so their rates will rise. For 2010–19 loans the pattern is looser: $150K–$350K loans did worst and $2M–$5M loans did best.</p>
+      </div>
+      <div class="legend"><span style="--sw: var(--cds-chart-muted)">2010–2019 (resolved)</span><span style="--sw: var(--sf-c0)" class="sf-sw0">2020–2023 (to date)</span></div>
+      <div class="chart" data-draw="sizechart" data-source="sizes" style="min-height: 280px"></div>
+    </section>
+
+    <section class="card" id="industries" style="grid-column: 1 / -1">
+      <div class="head">
+        <h2>Franchised vs independent, same industry</h2>
+        <p class="note">Default rate for franchised and independent borrowers in each industry. In auto repair, franchises defaulted far more often. "All decades" adds up every loan since 2000; it mixes resolved and young loans, so compare franchise with independent within a row rather than across periods.<span class="c90"> Only about 45% of 1990s loans carry an industry code, so 1990s counts are smaller and some industries (oil change, senior care, fast food) have almost none.</span></p>
+      </div>
+      <div class="controls">
+        <select class="sf-period" aria-label="Period">
+          <option value="All decades (1991–2026)" class="sf-o90" hidden disabled>All decades (1991–2026)</option>
+          <option value="All decades (2000–2026)" selected>All decades (2000–2026)</option>
+          <option value="1991–1999" class="sf-o90" hidden disabled>Loans made 1991–1999</option>
+          <option value="2000–2009">Loans made 2000–2009</option>
+          <option value="2010–2019">Loans made 2010–2019</option>
+          <option value="2020–2026 (to date)">Loans made 2020–2026 (to date)</option>
+        </select>
+      </div>
+      <div class="tablebox wide">
+      <table data-source="industries" data-row-key="industry_period">
+        <thead><tr>
+          <th data-field="industry" class="l"><span class="th">Industry</span></th>
+          <th data-field="franchise_loans" class="hide-narrow"><span class="th">Franchise loans</span></th>
+          <th data-field="franchise_rate"><span class="th">Franchise</span></th>
+          <th data-field="independent_loans" class="hide-narrow"><span class="th">Independent loans</span></th>
+          <th data-field="independent_rate"><span class="th">Independent</span></th>
+        </tr></thead>
+        <tbody data-draw="indrows"></tbody>
+      </table>
+      </div>
+    </section>
+  </div>
+
+  </div>
+
+  <div class="panel" id="panel-industries" role="tabpanel" hidden>
+    <section class="card" id="ind-chart">
+      <div class="head">
+        <h2>Your industries, ranked by risk</h2>
+        <p class="note">Risk index = actual defaults ÷ defaults expected at each decade's all-loan average, <span class="n90">2000–2026</span><span class="c90">1991–2026</span> (1.0 = average; left is safer).<span class="c90"> Industries with fewer than 50 coded 1990s loans keep their 2000–2026 index.</span> The first dot counts every SBA loan in the industry, startups included; the second counts only loans to buy an existing business (2010–2023). Faded dots rest on fewer than 100 purchase loans.</p>
+      </div>
+      <div class="legend"><span style="--sw: var(--sf-c0)">All loans</span><span style="--sw: var(--sf-c1)">Buying an existing business</span></div>
+      <div class="chart" data-draw="indchart" data-source="indeval" style="min-height: 460px"></div>
+    </section>
+
+    <section class="card" id="ind-table">
+      <div class="head">
+        <h2>Industry detail</h2>
+        <p class="note">Default rate = loans charged off ÷ loans, for all SBA 7(a) borrowers in each industry code. Click a column to sort.</p>
+      </div>
+      <div class="controls">
+        <select class="sf-indlist" aria-label="Industries shown">
+          <option value="Your list" selected>Your industries</option>
+          <option value="">Your industries + comparisons</option>
+        </select>
+      </div>
+      <div class="tablebox">
+        <table data-source="indeval" data-row-key="industry">
+          <thead><tr>
+            <th data-field="industry" class="l"><button type="button" data-isort="industry">Industry</button></th>
+            <th data-field="verdict" class="l"><button type="button" data-isort="verdict">Verdict</button></th>
+            <th data-field="risk_index" class="n90" aria-sort="ascending"><button type="button" data-isort="risk_index">Risk index</button></th>
+            <th data-field="risk_index_w90" class="c90"><button type="button" data-isort="risk_index_w90">Risk index</button></th>
+            <th data-field="purchase_risk"><button type="button" data-isort="purchase_risk">Purchase risk</button></th>
+            <th data-field="purchase_loans" class="hide-narrow"><button type="button" data-isort="purchase_loans">Purchase loans</button></th>
+            <th data-field="rate_1990s" class="hide-narrow c90"><button type="button" data-isort="rate_1990s">Default 1990s</button></th>
+            <th data-field="rate_2000s" class="hide-narrow"><button type="button" data-isort="rate_2000s">Default 2000s</button></th>
+            <th data-field="rate_2005_08"><button type="button" data-isort="rate_2005_08">Default 2005–08</button></th>
+            <th data-field="rate_2010s" class="hide-narrow"><button type="button" data-isort="rate_2010s">Default 2010s</button></th>
+            <th data-field="rate_2020s" class="hide-narrow"><button type="button" data-isort="rate_2020s">Default 2020–26</button></th>
+            <th data-field="median_loan_2010s" class="hide-narrow"><button type="button" data-isort="median_loan_2010s">Median loan 2010s</button></th>
+          </tr></thead>
+          <tbody data-draw="indevalrows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card keep">
+      <h2>What to keep in mind</h2>
+      <ul>
+        <li><b>Medical practices</b> (dental, physician, optometry) had low defaults in every decade, but most states require a licensed clinician to own them.</li>
+        <li><b>Self-storage</b> had the lowest risk on the list, with no defaults among purchase loans. It is mostly real estate, with a median loan near $860K in the 2010s.</li>
+        <li><b>Car washes, collision repair and plumbing/HVAC</b> are about average when startups are included, but purchases of established businesses did much better. Car washes were hit hard in the recession and need heavy capital. Plumbing and HVAC share one industry code.</li>
+        <li><b>Oil change &amp; lube</b> is about average across all loans, including through the recession. Purchases of existing shops did better, but on only 62 loans. Electric vehicles, which need no oil changes, are a long-term risk over a 10-year loan.</li>
+        <li><b>Commercial cleaning, electrical and property management</b> were average or worse. Residential property management had the highest recession-era default rate on the list.</li>
+        <li><b>Property restoration</b> has no industry code of its own, so remediation services stands in for it. See the Franchise brands tab for SERVPRO and other restoration brands.</li>
+        <li>Industry averages mix franchised and independent businesses, and purchase samples are small. The quality of the specific business and your cash reserve matter more.</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="panel" id="panel-all" role="tabpanel" hidden>
+    <section>
+      <h2>Safest industries to operate in, <span class="n90">2000–2019</span><span class="c90">1991–2019</span></h2>
+      <p class="note">Every industry with at least 400 SBA 7(a) loans made 2000–2019 that have finished (paid in full or charged off). The <b>safety index</b> is an industry's actual defaults ÷ the defaults expected at the all-loan average for each decade (24.1% for 2000s loans, 8.0% for 2010s loans): 1.0 = average, 0.5 = half as many defaults. The <b>recession index</b> does the same for loans made 2005–2008 only (average 31.2%), shown where an industry had at least 100 such loans.<span class="c90"> With 1990s loans on, the safety index also counts loans made 1991–1999 against the 1990s average for coded loans (<b data-draw="base" data-source="baselines" data-field="rate" data-where="period=1991–1999 coded loans">—</b>), for industries with at least 50 such loans. About 45% of 1990s loans carry an industry code, and wholesale codes were converted from the 1997 to the 2002 edition; 1990s construction codes could not be matched and are left out.</span></p>
+    </section>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr)); gap: var(--cds-gap-md);">
+      <section class="card" id="all-safest">
+        <div class="head">
+          <h3>The 25 safest industries</h3>
+          <p class="note">Industries with 1,000+ loans and data in both decades. A few low-risk industries with one decade of data, such as self-storage, appear only in the table below.</p>
+        </div>
+        <div class="chart" data-draw="allsafe" data-source="allind" style="min-height: 680px"></div>
+      </section>
+      <section class="card" id="all-common">
+        <div class="head">
+          <h3>The 25 most common industries, by safety</h3>
+          <p class="note">The industries with the most SBA loans since 2000, ranked by safety index. Bars past 1.0 defaulted more than average.</p>
+        </div>
+        <div class="chart" data-draw="allcommon" data-source="allind" style="min-height: 680px"></div>
+      </section>
+    </div>
+
+    <section class="card" id="all-table">
+      <div class="head">
+        <h2>All industries</h2>
+        <p class="note">Ranked by safety index. Click a column to sort; search by name; filter by sector or size. Default rate = loans charged off ÷ loans. 2020–26 is charge-offs so far ÷ all loans paid out, so it will rise. Purchases count loans to buy an existing business (2010 onward). Italic rows have data from only one decade, usually because the industry's code changed.</p>
+      </div>
+      <div class="controls">
+        <select data-draw="allsector" data-source="allind" aria-label="Sector"></select>
+        <select class="sf-allmin" aria-label="Minimum loans">
+          <option value="0" selected>Any number of loans</option>
+          <option value="1000">1,000+ loans</option>
+          <option value="5000">5,000+ loans</option>
+        </select>
+        <select class="sf-allcov" aria-label="Decades">
+          <option value="" selected>All industries</option>
+          <option value="Both decades">Data in both decades only</option>
+        </select>
+        <input type="search" class="sf-allsearch" placeholder="Search industries" aria-label="Search industries">
+      </div>
+      <div class="tablebox">
+        <table data-source="allind" data-row-key="industry">
+          <thead><tr>
+            <th data-field="rank" class="n90"><button type="button" data-asort="rank">Rank</button></th>
+            <th data-field="rank_w90" class="c90"><button type="button" data-asort="rank_w90">Rank</button></th>
+            <th data-field="industry" class="l"><button type="button" data-asort="industry">Industry</button></th>
+            <th data-field="sector" class="l hide-narrow"><button type="button" data-asort="sector">Sector</button></th>
+            <th data-field="loans_total" class="hide-narrow"><button type="button" data-asort="loans_total">Loans since 2000</button></th>
+            <th data-field="loans_1990s" class="hide-narrow c90"><button type="button" data-asort="loans_1990s">Loans 1990s</button></th>
+            <th data-field="rate_1990s" class="c90"><button type="button" data-asort="rate_1990s">Default 1990s</button></th>
+            <th data-field="rate_2000s"><button type="button" data-asort="rate_2000s">Default 2000s</button></th>
+            <th data-field="rate_2005_08" class="hide-narrow"><button type="button" data-asort="rate_2005_08">Default 2005–08</button></th>
+            <th data-field="rate_2010s"><button type="button" data-asort="rate_2010s">Default 2010s</button></th>
+            <th data-field="rate_2020s" class="hide-narrow"><button type="button" data-asort="rate_2020s">Default 2020–26</button></th>
+            <th data-field="safety_index" class="n90" aria-sort="ascending"><button type="button" data-asort="safety_index">Safety index</button></th>
+            <th data-field="safety_index_w90" class="c90"><button type="button" data-asort="safety_index_w90">Safety index</button></th>
+            <th data-field="recession_index" class="hide-narrow"><button type="button" data-asort="recession_index">Recession index</button></th>
+            <th data-field="purchases" class="hide-narrow"><button type="button" data-asort="purchases">Purchases</button></th>
+            <th data-field="purchase_median_loan" class="hide-narrow"><button type="button" data-asort="purchase_median_loan">Median purchase loan</button></th>
+          </tr></thead>
+          <tbody data-draw="allrows"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="panel" id="panel-504" role="tabpanel" hidden>
+    <section>
+      <h2>SBA 504 loans: which businesses held up, 1991–2019</h2>
+      <p class="note">504 loans are a separate SBA program from the 7(a) loans on the other tabs. They finance owner-occupied real estate and heavy equipment, so borrowers are usually established businesses buying their building. Loans approved 1991–2009 went through the 2008 recession and are the real stress test. Loans approved 2010–2019 have had seven or more years to play out. Loans approved since 2020 are left out because they are too young to judge.<span class="c90"> This tab already includes 504 loans from 1991, so the 1990s switch doesn't change it.</span> The <b>risk index</b> is actual charge-offs ÷ the charge-offs expected at the all-504 average for each approval year: 1.0 = average, 0.5 = half as many.</p>
+    </section>
+
+    <div class="tiles">
+      <div class="tile"><span class="lab">504 loans approved 1991–2009</span><span class="big" data-draw="v504" data-source="base504" data-field="rate" data-where="period=1991–2009">—</span><span class="lab">charged off, of <b data-draw="v504" data-fmt="int" data-source="base504" data-field="loans" data-where="period=1991–2009">—</b> funded loans</span></div>
+      <div class="tile"><span class="lab">Approved 2005–2008</span><span class="big" data-draw="v504" data-source="base504" data-field="rate" data-where="period=2005–2008">—</span><span class="lab">charged off; these loans hit the recession soon after funding</span></div>
+      <div class="tile"><span class="lab">504 loans approved 2010–2019</span><span class="big" data-draw="v504" data-source="base504" data-field="rate" data-where="period=2010–2019">—</span><span class="lab">charged off, of <b data-draw="v504" data-fmt="int" data-source="base504" data-field="loans" data-where="period=2010–2019">—</b> funded loans</span></div>
+    </div>
+
+    <section class="card keep" id="f504">
+      <h2>What the 504 data says</h2>
+      <ul>
+        <li><b>Licensed practices were safest in every era.</b> Dentists charged off <b data-draw="v504" data-source="ind504" data-field="rate_old" data-where="industry=Offices of Dentists">—</b> of loans approved 1991–2009 and <b data-draw="v504" data-source="ind504" data-field="rate_new" data-where="industry=Offices of Dentists">—</b> of 2010–2019 loans. For optometrists the figures were <b data-draw="v504" data-source="ind504" data-field="rate_old" data-where="industry=Offices of Optometrists">—</b> and <b data-draw="v504" data-source="ind504" data-field="rate_new" data-where="industry=Offices of Optometrists">—</b>, and for veterinarians <b data-draw="v504" data-source="ind504" data-field="rate_old" data-where="industry=Veterinary Services">—</b> and <b data-draw="v504" data-source="ind504" data-field="rate_new" data-where="industry=Veterinary Services">—</b>. Dental loans approved just before the 2008 crash charged off at <b data-draw="v504" data-source="ind504" data-field="rate_crisis" data-where="industry=Offices of Dentists">—</b>, against <b data-draw="v504" data-source="base504" data-field="rate" data-where="period=2005–2008">—</b> for all 504 loans approved in those years.</li>
+        <li><b>Hospitality was weakest in both eras.</b> <b data-draw="v504" data-source="ind504" data-field="rate_crisis" data-where="industry=Hotels (except Casino Hotels) and Motels">—</b> of hotel loans and <b data-draw="v504" data-source="ind504" data-field="rate_crisis" data-where="industry=Full-Service Restaurants">—</b> of full-service restaurant loans approved 2005–2008 were charged off.</li>
+        <li><b>Businesses tied to housing and credit only look safe recently.</b> Real estate brokers charged off <b data-draw="v504" data-source="ind504" data-field="rate_crisis" data-where="industry=Offices of Real Estate Agents and Brokers">—</b> of loans approved 2005–2008 but only <b data-draw="v504" data-source="ind504" data-field="rate_new" data-where="industry=Offices of Real Estate Agents and Brokers">—</b> since 2010. Car washes, car dealers and finance businesses show the same swing. Their recent record reflects a decade without a housing crash.</li>
+        <li><b>Franchises that held up through 2008:</b> Culver's had <b data-draw="v504" data-fmt="int" data-source="brand504" data-field="charge_offs" data-where="brand=Culver's">—</b> charge-offs in <b data-draw="v504" data-fmt="int" data-source="brand504" data-field="loans_total" data-where="brand=Culver's">—</b> loans, Zaxby's <b data-draw="v504" data-fmt="int" data-source="brand504" data-field="charge_offs" data-where="brand=Zaxby's">—</b> in <b data-draw="v504" data-fmt="int" data-source="brand504" data-field="loans_total" data-where="brand=Zaxby's">—</b> and Primrose Schools <b data-draw="v504" data-fmt="int" data-source="brand504" data-field="charge_offs" data-where="brand=Primrose Schools">—</b> in <b data-draw="v504" data-fmt="int" data-source="brand504" data-field="loans_total" data-where="brand=Primrose Schools">—</b>.</li>
+        <li><b>Holiday Inn Express shows why the older data matters.</b> It had a <b data-draw="v504" data-source="brand504" data-field="rate_new" data-where="brand=Holiday Inn Express">—</b> charge-off rate on loans approved since 2010, but <b data-draw="v504" data-source="brand504" data-field="rate_crisis" data-where="brand=Holiday Inn Express">—</b> of its loans approved 2005–2008 were charged off. Economy hotel brands did worst overall: Days Inn <b data-draw="v504" data-source="brand504" data-field="rate_total" data-where="brand=Days Inn">—</b>, Ramada <b data-draw="v504" data-source="brand504" data-field="rate_total" data-where="brand=Ramada">—</b> and Microtel <b data-draw="v504" data-source="brand504" data-field="rate_total" data-where="brand=Microtel">—</b>.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="sec504-card">
+      <div class="head">
+        <h2>504 risk by sector, before and after 2010</h2>
+        <p class="note">Each sector's risk index for loans approved 1991–2009 and 2010–2019 (left is safer). A long line means the sector's record changed between eras.</p>
+      </div>
+      <div class="legend"><span style="--sw: var(--sf-c0)">Approved 1991–2009</span><span style="--sw: var(--sf-c1)">Approved 2010–2019</span></div>
+      <div class="chart" data-draw="sec504chart" data-source="sec504" style="min-height: 460px"></div>
+    </section>
+
+    <section class="card" id="ind504-chart">
+      <div class="head">
+        <h2>Industries with a clear pattern across both eras</h2>
+        <p class="note">Industries rated safe in both eras, weak in both, or that changed between them, out of every industry with at least 150 loans in each era. Sorted by the 1991–2009 risk index. Industries close to average in both eras are in the table below.</p>
+      </div>
+      <div class="legend"><span style="--sw: var(--sf-c0)">Approved 1991–2009</span><span style="--sw: var(--sf-c1)">Approved 2010–2019</span></div>
+      <div class="chart" data-draw="ind504chart" data-source="ind504" style="min-height: 900px"></div>
+    </section>
+
+    <section class="card" id="ind504-table">
+      <div class="head">
+        <h2>All 504 industries</h2>
+        <p class="note">Every industry with at least 300 funded 504 loans approved 1991–2019. Charge-off rate = loans charged off ÷ funded loans. "Safe" means a risk index of 0.8 or lower, "weak" 1.25 or higher. A rate is shown where the period has at least 50 loans (75 for 2005–08), and an era's risk index where it has at least 150. Industry codes are missing for most loans approved before FY2001, so the 1991–2009 columns rest mainly on loans approved 1999–2009. Click a column to sort.</p>
+      </div>
+      <div class="controls">
+        <select class="sf-v504" aria-label="Pattern">
+          <option value="" selected>All patterns</option>
+          <option value="Safe in both eras">Safe in both eras</option>
+          <option value="Weak in both eras">Weak in both eras</option>
+          <option value="Safe only recently">Safe only recently</option>
+          <option value="Worse recently">Worse recently</option>
+          <option value="About average">About average</option>
+          <option value="One era only">One era only</option>
+        </select>
+        <input type="search" class="sf-i504search" placeholder="Search industries" aria-label="Search 504 industries">
+      </div>
+      <div class="tablebox">
+        <table data-source="ind504" data-row-key="industry">
+          <thead><tr>
+            <th data-field="rank"><button type="button" data-i5="rank">Rank</button></th>
+            <th data-field="industry" class="l"><button type="button" data-i5="industry">Industry</button></th>
+            <th data-field="verdict" class="l"><button type="button" data-i5="verdict">Pattern</button></th>
+            <th data-field="loans_total" class="hide-narrow"><button type="button" data-i5="loans_total">Loans</button></th>
+            <th data-field="rate_old"><button type="button" data-i5="rate_old">Charge-off 1991–2009</button></th>
+            <th data-field="rate_crisis" class="hide-narrow"><button type="button" data-i5="rate_crisis">Charge-off 2005–08</button></th>
+            <th data-field="rate_new"><button type="button" data-i5="rate_new">Charge-off 2010–19</button></th>
+            <th data-field="risk_old" class="hide-narrow"><button type="button" data-i5="risk_old">Risk 1991–2009</button></th>
+            <th data-field="risk_new" class="hide-narrow"><button type="button" data-i5="risk_new">Risk 2010–19</button></th>
+            <th data-field="risk_all" aria-sort="ascending"><button type="button" data-i5="risk_all">Risk index, all</button></th>
+          </tr></thead>
+          <tbody data-draw="ind504rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" id="brand504-chart">
+      <div class="head">
+        <h2>504 franchise brands with 100+ loans</h2>
+        <p class="note">Risk index across all 504 loans approved 1991–2019 (left is safer). Hover for each era's charge-off rate.</p>
+      </div>
+      <div class="chart" data-draw="brand504chart" data-source="brand504" style="min-height: 560px"></div>
+    </section>
+
+    <section class="card" id="brand504-table">
+      <div class="head">
+        <h2>All 504 franchise brands</h2>
+        <p class="note">Brands with at least 40 funded 504 loans approved 1991–2019, matched by name in the SBA franchise field (for example "CULVER'S" and "Culver's Frozen Custard" count together). A rate is shown where the period has at least 15 loans. "Likely max" is the upper end of a 95% confidence range for the true charge-off rate, which matters for small brands with zero charge-offs. Italic rows have fewer than 60 loans.</p>
+      </div>
+      <div class="controls">
+        <select data-draw="b504cat" data-source="brand504" aria-label="504 brand category"></select>
+        <input type="search" class="sf-b504search" placeholder="Search brands" aria-label="Search 504 brands">
+      </div>
+      <div class="tablebox">
+        <table data-source="brand504" data-row-key="brand">
+          <thead><tr>
+            <th data-field="brand" class="l"><button type="button" data-b5="brand">Brand</button></th>
+            <th data-field="category" class="l hide-narrow"><button type="button" data-b5="category">Category</button></th>
+            <th data-field="loans_old" class="hide-narrow"><button type="button" data-b5="loans_old">Loans 1991–2009</button></th>
+            <th data-field="rate_old"><button type="button" data-b5="rate_old">Charge-off 1991–2009</button></th>
+            <th data-field="rate_crisis" class="hide-narrow"><button type="button" data-b5="rate_crisis">Charge-off 2005–08</button></th>
+            <th data-field="loans_new" class="hide-narrow"><button type="button" data-b5="loans_new">Loans 2010–19</button></th>
+            <th data-field="rate_new"><button type="button" data-b5="rate_new">Charge-off 2010–19</button></th>
+            <th data-field="loans_total" class="hide-narrow"><button type="button" data-b5="loans_total">Total loans</button></th>
+            <th data-field="charge_offs" class="hide-narrow"><button type="button" data-b5="charge_offs">Charge-offs</button></th>
+            <th data-field="upper95" class="hide-narrow"><button type="button" data-b5="upper95">Likely max</button></th>
+            <th data-field="risk_index" aria-sort="ascending"><button type="button" data-b5="risk_index">Risk index</button></th>
+          </tr></thead>
+          <tbody data-draw="brand504rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <footer class="foot" id="sources">
+    <h2>Method and sources</h2>
+    <ul>
+      <li><b>Default</b> means the SBA loan was charged off. Cancelled and undisbursed loans are excluded. For loans made 2000–2019, only resolved loans (paid in full or charged off) are counted. Loans made since 2020 are counted as charge-offs to date ÷ all disbursed loans; most defaults arrive around year four, so these are floors.</li>
+      <li><b>Risk index</b> = a brand's actual defaults ÷ the defaults expected if it had matched the all-loan average in each decade (23.9% for 2000s loans, 8.0% for 2010s loans, 2.5% so far for 2020s loans).</li>
+      <li>Brands were matched by name in the SBA FranchiseName field (for example, "Midas" and "Midas Muffler Shop" count together). Lenders enter these labels and they are incomplete, so counts can differ slightly from other sites.</li>
+      <li>The 2000–2009 SBA file has no change-of-ownership flag, so the loan-size chart and the industry purchase risk use 2010 onward only.</li>
+      <li><b>All industries</b> groups loans by the industry description on each loan, merging names the SBA changed in 2022 (for example "Liquor Stores" became "Liquor Retailers"). About 17,000 loans from the 2000s have no industry code and are left out. Its averages (24.1% for 2000s loans, 8.0% for 2010s loans) cover only loans with an industry code, so the 2000s figure is slightly higher than the 23.9% shown on the Franchise brands tab.</li>
+      <li><b>Industries</b> are grouped by the NAICS code on each loan (for example 531130 self-storage, 621210 dentists, 238220 plumbing &amp; HVAC). Purchase risk compares defaults on change-of-ownership loans made 2010–2023 with the average for all such loans (7.3% for 2010s loans, 2.0% so far for 2020–23 loans).</li>
+      <li><b>1990s loans</b> (switch at the top): SBA 7(a) loans approved FY1991–1999, counted the same way as the 2000s file (cancelled and undisbursed loans out; resolved loans only). They add a 1990s column and fold into each risk and safety index at the 1990s all-loan average. Brands are matched by the 1990s FranchiseName spellings (for example "SUBWAY SANDWICH SHOP", "MIDAS MUFFLER SHOP"). Industry codes are on only about 45% of 1990s loans and skew toward some trades, so the 1990s industry figures are thinner than other decades. The loan-size chart and purchase risk stay 2010 onward, since the 1990s file has no change-of-ownership flag.</li>
+      <li><b>SBA 504 loans</b> tab: built from the SBA 504 FOIA files for FY1991–2009 and FY2010–present (statuses as of September 30, 2026), counting funded loans approved through FY2019; cancelled and unfunded loans are excluded. Loans whose status the SBA marks "exempt" (mostly active loans) count as not charged off. Its risk index uses each approval year's all-504 charge-off rate as the expectation. Industry codes changed between NAICS editions are merged (for example 722110 into 722511, full-service restaurants).</li>
+    </ul>
+    <h3>Sources</h3>
+    <ol>
+      <li>U.S. Small Business Administration, 7(a) FOIA loan-level data: FY1991–FY1999, FY2000–FY2009, FY2010–FY2019 and FY2020–present files, loan statuses as of September 30, 2026. <a href="https://data.sba.gov/dataset/7-a-504-foia" target="_blank" rel="noopener">data.sba.gov</a>. All figures on this page are computed from these files.</li>
+      <li>U.S. Small Business Administration, 504 FOIA loan-level data: FY1991–FY2009 and FY2010–present files, loan statuses as of September 30, 2026. <a href="https://data.sba.gov/dataset/7-a-504-foia" target="_blank" rel="noopener">data.sba.gov</a>. Source of the SBA 504 loans tab.</li>
+      <li>Franchise Failure Rates, "Franchise SBA Default Rates: 415 Brands, FY2010–FY2019" (statuses as of June 30, 2026), used as a cross-check. <a href="https://franchisefailurerates.com/" target="_blank" rel="noopener">franchisefailurerates.com</a></li>
+      <li>SBA Loan Data, "Franchise SBA Loans &amp; Default Rates." <a href="https://www.sbaloandata.org/franchises" target="_blank" rel="noopener">sbaloandata.org</a></li>
+      <li>Lendesca, "Buying an Existing Business Is the Safest SBA Loan" (May 2026). <a href="https://www.lendesca.com/buying-an-existing-business-is-the-safest-sba-loan-the-numbers-prove-it-the-lowest-charge-off-rate-in-sba-lending-belongs-to-one-loan-type-heres-the-data/" target="_blank" rel="noopener">lendesca.com</a></li>
+      <li>Lumos, "SBA 7(a) Default Rates Hit 4.8%" (July 2026). <a href="https://www.lumosdata.com/blog/sba-default-rates-small-business-credit-risk-2026" target="_blank" rel="noopener">lumosdata.com</a></li>
+      <li>CT Acquisitions, "SBA 7(a) &amp; 504 Financing Statistics 2026." <a href="https://ctacquisitions.com/guides/sba-financing-statistics-2026/" target="_blank" rel="noopener">ctacquisitions.com</a></li>
+      <li>FRANdata, "SBA Loan Performance and the Challenges that lie in finding the most accurate information" (2019), on franchise labeling errors in SBA data. <a href="https://frandata.com/?p=5252" target="_blank" rel="noopener">frandata.com</a></li>
+      <li>Searchfunder, "New SOP Changes SOP 50 10 8.1," on current SBA acquisition equity rules. <a href="https://searchfunder.com/post/new-sop-changes-sop-50-10-81" target="_blank" rel="noopener">searchfunder.com</a></li>
+    </ol>
+    <p>Historical loan performance only. Not a prediction for any specific business and not financial or legal advice.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const S = window.SFState = { cat: '', q: '', sort: 'risk_index', dir: 1 };
+  const num = (v) => (v === '' || v == null || isNaN(Number(v))) ? null : Number(v);
+  const pct = (v) => v == null ? '—' : d3.format('.1%')(v);
+  const int = (v) => v == null ? '—' : d3.format(',')(v);
+  const idx = (v) => v == null ? '—' : d3.format('.2f')(v);
+  window.SFfmt = { num, pct, int, idx };
+  // 1990s switch: kept in the page's filters as with90
+  const ERA = window.SFEra = { v: null };
+  const W90 = window.SFW90 = () => ERA.v ?? !!dash.params().with90;
+  const pick = window.SFpick = (r, k) => (W90() && (k + '_w90') in r) ? r[k + '_w90'] : r[k];
+  const failLine = (el, st) => { el.replaceChildren(); if (st === 'error') { const d = document.createElement('div'); d.className = 'fail'; d.textContent = 'Failed to load'; el.appendChild(d); } };
+  window.SFfail = failLine;
+  const tip = (el) => { let t = el.querySelector(':scope > .tip'); if (!t) { t = document.createElement('div'); t.className = 'tip'; el.appendChild(t); } t.style.display = 'none'; return t; };
+  window.SFtip = tip;
+  const placeTip = (el, t, ev) => {
+    const r = el.getBoundingClientRect(); t.style.display = 'block';
+    let x = ev.clientX - r.left + 12, y = ev.clientY - r.top + 12;
+    const w = t.offsetWidth, h = t.offsetHeight;
+    if (x + w > r.width) x = Math.max(0, ev.clientX - r.left - w - 12);
+    if (y + h > r.height) y = Math.max(0, ev.clientY - r.top - h - 12);
+    t.style.left = x + 'px'; t.style.top = y + 'px';
+  };
+  window.SFplace = placeTip;
+  const whereVal = (el) => decodeURIComponent((el.getAttribute('data-where') || '').split('=').slice(1).join('='));
+
+  // swatch color for legend
+  document.querySelectorAll('.sf').forEach((root) => { root.style.setProperty('--sf-c0', dash.colors[0]); root.style.setProperty('--sf-c1', dash.colors[1]); });
+
+  dash.draw('cb-def', (el) => {
+    const d = dash.data('brands'); if (d.status !== 'ok') { el.textContent = '—'; return; }
+    const r = d.data.find((x) => x.brand === 'Christian Brothers Automotive'); el.textContent = r ? int(num(r.total_defaults)) : '—';
+  });
+  dash.draw('cb-loans', (el) => {
+    const d = dash.data('brands'); if (d.status !== 'ok') { el.textContent = '—'; return; }
+    const r = d.data.find((x) => x.brand === 'Christian Brothers Automotive'); el.textContent = r ? int(num(r.total_loans)) : '—';
+  });
+  dash.draw('base', (el) => {
+    const d = dash.data('baselines'); if (d.status !== 'ok') { el.textContent = '—'; return; }
+    const r = d.data.find((x) => x.period === whereVal(el)); el.textContent = r ? pct(num(r.rate)) : '—';
+  });
+
+  dash.draw('autochart', (el) => {
+    const d = dash.data('brands');
+    if (d.status !== 'ok') { failLine(el, d.status); return; }
+    const rows = d.data.filter((r) => r.category === 'Auto' && num(pick(r, 'risk_index')) != null)
+      .map((r) => ({ ...r, ri: num(pick(r, 'risk_index')) })).sort((a, b) => a.ri - b.ri || num(b.total_loans) - num(a.total_loans));
+    el.replaceChildren(); const t = tip(el);
+    const W = Math.max(280, el.clientWidth), rowH = 24, top = 22, bottom = 26;
+    const H = top + rows.length * rowH + bottom;
+    const svg = d3.select(el).insert('svg', ':first-child').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    // measure labels
+    const meas = svg.append('g');
+    let lw = 0; rows.forEach((r) => { const n = meas.append('text').text(r.brand).node(); lw = Math.max(lw, n.getComputedTextLength()); });
+    meas.remove();
+    const left = Math.min(lw + 12, W * 0.45), right = 44;
+    const xmax = Math.max(2, d3.max(rows, (r) => r.ri) * 1.05);
+    const x = d3.scaleLinear([0, xmax], [left, W - right]);
+    const y = (i) => top + i * rowH;
+    const ticks = x.ticks(Math.max(2, Math.floor((W - left - right) / 70)));
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', x).attr('x2', x).attr('y1', top - 4).attr('y2', H - bottom).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('class', 'tick').attr('x', x).attr('y', H - 8).attr('text-anchor', 'middle').text((v) => d3.format('.1f')(v));
+    const seasoned = (r) => num(r.loans_2000s) + num(r.loans_2010s) + (W90() ? (num(r.loans_1990s) || 0) : 0);
+    const col = (r) => r.ri > 1.5 ? 'var(--cds-chart-status-critical)' : r.ri <= 1 ? dash.colors[0] : 'var(--cds-chart-muted)';
+    const g = svg.append('g').selectAll('g').data(rows).join('g').attr('transform', (r, i) => `translate(0,${y(i)})`);
+    g.append('text').attr('x', left - 8).attr('y', rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').text((r) => r.brand)
+      .attr('fill', (r) => seasoned(r) < 40 ? 'var(--color-fg-muted)' : 'var(--color-fg)');
+    g.append('rect').attr('x', left).attr('y', 5).attr('height', rowH - 10).attr('rx', 3)
+      .attr('width', (r) => Math.max(2, x(r.ri) - left)).attr('fill', col).attr('opacity', (r) => seasoned(r) < 40 ? 0.4 : 1);
+    g.append('text').attr('x', (r) => Math.max(left + 2, x(r.ri)) + 6).attr('y', rowH / 2).attr('dy', '0.35em').attr('class', 'tick').text((r) => idx(r.ri));
+    g.append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', rowH).attr('fill', 'transparent')
+      .on('mousemove', (ev, r) => {
+        t.replaceChildren();
+        const h = document.createElement('div'); h.className = 't'; h.textContent = r.brand; t.appendChild(h);
+        [['Risk index', idx(r.ri)], ['Loans, all decades', int(num(pick(r, 'total_loans')))], ...(W90() ? [['Default 1990s', pct(num(r.rate_1990s)) + ' of ' + int(num(r.loans_1990s))]] : []), ['Default 2000s', pct(num(r.rate_2000s)) + ' of ' + int(num(r.loans_2000s))],
+         ['Default 2005–08', pct(num(r.rate_2005_08))], ['Default 2010s', pct(num(r.rate_2010s)) + ' of ' + int(num(r.loans_2010s))],
+         ['Default 2020–26 so far', pct(num(r.rate_2020s)) + ' of ' + int(num(r.loans_2020s))]].forEach(([k, v]) => { const l = document.createElement('div'); l.textContent = k + ': ' + v; t.appendChild(l); });
+        placeTip(el, t, ev);
+      }).on('mouseleave', () => { t.style.display = 'none'; });
+    svg.append('line').attr('x1', x(1)).attr('x2', x(1)).attr('y1', top - 6).attr('y2', H - bottom).attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+    svg.append('text').attr('x', x(1)).attr('y', top - 10).attr('text-anchor', 'middle').attr('class', 'tick').text('Average');
+    el.style.minHeight = H + 'px';
+  });
+
+  dash.draw('catselect', (sel) => {
+    const d = dash.data('brands');
+    const cats = d.status === 'ok' ? Array.from(new Set(d.data.map((r) => r.category))) : [];
+    sel.replaceChildren(new Option('All categories', ''), ...cats.map((c) => new Option(c, c)));
+    sel.value = S.cat; sel.onchange = () => { S.cat = sel.value; dash.draw('brandrows'); };
+  });
+
+  dash.draw('brandrows', (tb) => {
+    const d = dash.data('brands'); tb.replaceChildren();
+    if (d.status !== 'ok') return;
+    const q = S.q.trim().toLowerCase();
+    const textCols = ['brand', 'category'];
+    let rows = d.data.filter((r) => (!S.cat || r.category === S.cat) && (!q || (r.brand + ' ' + r.category).toLowerCase().includes(q)));
+    const k = S.sort;
+    rows = rows.slice().sort((a, b) => {
+      if (textCols.includes(k)) return S.dir * a[k].localeCompare(b[k]);
+      const av = num(a[k]), bv = num(b[k]);
+      if (av == null && bv == null) return 0; if (av == null) return 1; if (bv == null) return -1;
+      return S.dir * (av - bv);
+    });
+    const maxRi = 2.5;
+    const cols = [['brand', (v) => v, 'l'], ['category', (v) => v, 'l hide-narrow'], ['loans_1990s', (v) => int(num(v)), 'hide-narrow c90'], ['rate_1990s', (v) => pct(num(v)), 'c90'],
+      ['loans_2000s', (v) => int(num(v)), 'hide-narrow'], ['rate_2000s', (v) => pct(num(v)), ''],
+      ['rate_2005_08', (v) => pct(num(v)), 'hide-narrow'], ['loans_2010s', (v) => int(num(v)), 'hide-narrow'], ['rate_2010s', (v) => pct(num(v)), ''],
+      ['loans_2020s', (v) => int(num(v)), 'hide-narrow'], ['rate_2020s', (v) => pct(num(v)), 'hide-narrow'], ['total_loans', (v) => int(num(v)), 'hide-narrow n90'], ['total_loans_w90', (v) => int(num(v)), 'hide-narrow c90'],
+      ['aggregate_rate', (v) => pct(num(v)), 'n90'], ['aggregate_rate_w90', (v) => pct(num(v)), 'c90']];
+    rows.forEach((r) => {
+      const tr = document.createElement('tr'); if (r.sample === 'Small') tr.className = 'small';
+      cols.forEach(([c, f, cls]) => { const td = document.createElement('td'); if (cls) td.className = cls; td.textContent = f(r[c]); tr.appendChild(td); });
+      [['risk_index', 'n90'], ['risk_index_w90', 'c90']].forEach(([k, cls]) => {
+        const td = document.createElement('td'); td.className = cls; const v = num(r[k]);
+        const wrap = document.createElement('span'); wrap.className = 'ri';
+        const bar = document.createElement('i'); bar.style.width = (v == null ? 0 : Math.min(v, maxRi) / maxRi * 48) + 'px';
+        bar.style.background = v == null ? 'transparent' : v > 1.5 ? 'var(--cds-chart-status-critical)' : v <= 1 ? dash.colors[0] : 'var(--cds-chart-muted)';
+        const s = document.createElement('span'); s.textContent = idx(v);
+        wrap.append(bar, s); td.appendChild(wrap); tr.appendChild(td);
+      });
+      const money = (v) => v == null ? '—' : v >= 1e6 ? '$' + d3.format('.2f')(v / 1e6) + 'M' : '$' + d3.format(',')(Math.round(v / 1000)) + 'K';
+      const pn = num(r.purchase_loans);
+      [[money(num(r.median_purchase_loan)), pn != null && pn < 10 ? 'lowconf' : ''], [int(pn), pn != null && pn < 10 ? 'lowconf' : ''], [money(num(r.median_loan_2020s)), 'hide-narrow']].forEach(([v, cls]) => {
+        const td = document.createElement('td'); if (cls) td.className = cls; td.textContent = v; tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  });
+
+  document.querySelectorAll('.sf-search').forEach((inp) => { inp.value = ''; }); document.querySelectorAll('.sf-search').forEach((inp) => inp.addEventListener('input', () => { S.q = inp.value; dash.draw('brandrows'); }));
+  document.querySelectorAll('#brands th button[data-sort]').forEach((btn) => btn.addEventListener('click', () => {
+    const k = btn.getAttribute('data-sort');
+    const kb = k.replace(/_w90$/, '');
+    if (S.sort === k) S.dir = -S.dir; else { S.sort = k; S.dir = ['brand', 'category', 'risk_index', 'median_purchase_loan', 'median_loan_2020s'].includes(kb) || kb.startsWith('rate') || kb === 'aggregate_rate' ? 1 : -1; }
+    document.querySelectorAll('#brands th').forEach((th) => th.removeAttribute('aria-sort'));
+    btn.parentElement.setAttribute('aria-sort', S.dir === 1 ? 'ascending' : 'descending');
+    dash.draw('brandrows');
+  }));
+
+  const P = window.SFPeriod = { p: 'All decades (2000–2026)' };
+  dash.draw('indrows', (tb) => {
+    const d = dash.data('industries'); tb.replaceChildren();
+    if (d.status !== 'ok') return;
+    d.data.filter((r) => r.period === P.p).forEach((r) => {
+      const tr = document.createElement('tr'); tr.setAttribute('data-key', r.industry_period);
+      const fr = num(r.franchise_rate), ir = num(r.independent_rate);
+      [[r.industry, 'l'], [int(num(r.franchise_loans)), 'hide-narrow'], [pct(fr), fr != null && ir != null && fr > ir * 1.25 ? 'bad' : fr != null && ir != null && fr < ir * 0.8 ? 'good' : ''],
+       [int(num(r.independent_loans)), 'hide-narrow'], [pct(ir), '']].forEach(([v, c]) => { const td = document.createElement('td'); if (c) td.className = c; td.textContent = v; tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+  });
+  document.querySelectorAll('.sf-period').forEach((s) => { s.value = P.p; s.addEventListener('change', () => { P.p = s.value; dash.draw('indrows'); }); });
+
+  dash.draw('sizechart', (el) => {
+    const d = dash.data('sizes');
+    if (d.status !== 'ok') { failLine(el, d.status); return; }
+    el.replaceChildren(); const t = tip(el);
+    const rows = d.data.map((r) => ({ ...r, rate: num(r.rate), loans: num(r.loans), defaults: num(r.defaults) }));
+    const sizes = Array.from(new Set(rows.map((r) => r.loan_size))); const periods = Array.from(new Set(rows.map((r) => r.period)));
+    const W = Math.max(280, el.clientWidth), H = 280, m = { t: 12, r: 8, b: 40, l: 40 };
+    const svg = d3.select(el).insert('svg', ':first-child').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const x0 = d3.scaleBand(sizes, [m.l, W - m.r]).paddingInner(0.25).paddingOuter(0.1);
+    const x1 = d3.scaleBand(periods, [0, x0.bandwidth()]).padding(0.12);
+    const y = d3.scaleLinear([0, d3.max(rows, (r) => r.rate) * 1.1], [H - m.b, m.t]).nice();
+    const yt = y.ticks(4);
+    svg.append('g').selectAll('line').data(yt).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(yt).join('text').attr('class', 'tick').attr('x', m.l - 6).attr('y', y).attr('dy', '0.35em').attr('text-anchor', 'end').text((v) => d3.format('.0%')(v));
+    const narrow = x0.bandwidth() < 54;
+    svg.append('g').selectAll('text').data(sizes).join('text').attr('class', 'tick').attr('text-anchor', 'middle')
+      .attr('x', (s) => x0(s) + x0.bandwidth() / 2).attr('y', H - m.b + 16).text((s) => { if (!narrow) return s; const p = s.replace('Under ', '<').split('–'); return p.length > 1 ? p[0] + '–' : p[0]; });
+    if (narrow) svg.append('g').selectAll('text').data(sizes.filter((s) => s.includes('–'))).join('text').attr('class', 'tick').attr('text-anchor', 'middle')
+      .attr('x', (s) => x0(s) + x0.bandwidth() / 2).attr('y', H - m.b + 30).text((s) => s.split('–')[1]);
+    const col = (p, i) => i === 0 ? 'var(--cds-chart-muted)' : dash.colors[0];
+    svg.append('g').selectAll('rect').data(rows).join('rect')
+      .attr('x', (r) => x0(r.loan_size) + x1(r.period)).attr('width', Math.min(32, x1.bandwidth()))
+      .attr('y', (r) => y(r.rate)).attr('height', (r) => y(0) - y(r.rate)).attr('rx', 3)
+      .attr('fill', (r) => col(r.period, periods.indexOf(r.period)))
+      .on('mousemove', (ev, r) => {
+        t.replaceChildren(); const h = document.createElement('div'); h.className = 't'; h.textContent = r.loan_size + ' · ' + r.period; t.appendChild(h);
+        const l = document.createElement('div'); l.textContent = pct(r.rate) + ' defaulted (' + int(r.defaults) + ' of ' + int(r.loans) + ' loans)'; t.appendChild(l);
+        placeTip(el, t, ev);
+      }).on('mouseleave', () => { t.style.display = 'none'; });
+  });
+
+  // tabs
+  const showTab = (id) => {
+    document.querySelectorAll('.sf .panel').forEach((p) => { p.hidden = p.id !== id; });
+    document.querySelectorAll('.sf-tab').forEach((b) => b.setAttribute('aria-selected', b.getAttribute('data-tab') === id ? 'true' : 'false'));
+  };
+  document.querySelectorAll('.sf-tab').forEach((b) => b.addEventListener('click', () => { const id = b.getAttribute('data-tab'); showTab(id); dash.setLink(id); }));
+  const want = location.hash.slice(1);
+  if (want && document.getElementById(want) && document.getElementById(want).classList.contains('panel')) showTab(want);
+
+  const IS = window.SFInd = { list: 'Your list', sort: 'risk_index', dir: 1 };
+  const vClass = (v) => v === 'Strong' || v === 'Good' ? 'v-strong' : v === 'Weak' || v === 'Below average' ? 'v-weak' : v === 'Comparison' ? '' : 'v-mid';
+
+  dash.draw('indchart', (el) => {
+    const d = dash.data('indeval');
+    if (d.status !== 'ok') { failLine(el, d.status); return; }
+    const rows = d.data.filter((r) => r.list === 'Your list').map((r) => ({ ...r, a: num(pick(r, 'risk_index')), p: num(r.purchase_risk), pn: num(r.purchase_loans) }))
+      .sort((x, y) => x.a - y.a);
+    el.replaceChildren(); const t = tip(el);
+    const W = Math.max(280, el.clientWidth), rowH = 26, top = 22, bottom = 26, H = top + rows.length * rowH + bottom;
+    const svg = d3.select(el).insert('svg', ':first-child').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const meas = svg.append('g'); let lw = 0;
+    rows.forEach((r) => { lw = Math.max(lw, meas.append('text').text(r.industry).node().getComputedTextLength()); }); meas.remove();
+    const left = Math.min(lw + 12, W * 0.5), right = 16;
+    const xmax = Math.max(2, d3.max(rows, (r) => Math.max(r.a, r.p ?? 0)) * 1.05);
+    const x = d3.scaleLinear([0, xmax], [left, W - right]);
+    const ticks = x.ticks(Math.max(2, Math.floor((W - left - right) / 70)));
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', x).attr('x2', x).attr('y1', top - 4).attr('y2', H - bottom).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('class', 'tick').attr('x', x).attr('y', H - 8).attr('text-anchor', 'middle').text((v) => d3.format('.1f')(v));
+    svg.append('line').attr('x1', x(1)).attr('x2', x(1)).attr('y1', top - 6).attr('y2', H - bottom).attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+    svg.append('text').attr('x', x(1)).attr('y', top - 10).attr('text-anchor', 'middle').attr('class', 'tick').text('Average');
+    const g = svg.append('g').selectAll('g').data(rows).join('g').attr('transform', (r, i) => `translate(0,${top + i * rowH})`);
+    g.append('text').attr('x', left - 8).attr('y', rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').text((r) => r.industry);
+    g.filter((r) => r.p != null).append('line').attr('x1', (r) => x(r.a)).attr('x2', (r) => x(r.p)).attr('y1', rowH / 2).attr('y2', rowH / 2).attr('stroke', 'var(--cds-chart-muted)').attr('stroke-width', 2).attr('stroke-linecap', 'round');
+    g.append('circle').attr('cx', (r) => x(r.a)).attr('cy', rowH / 2).attr('r', 5.5).attr('fill', dash.colors[0]);
+    g.filter((r) => r.p != null).append('circle').attr('cx', (r) => x(r.p)).attr('cy', rowH / 2).attr('r', 5.5).attr('fill', dash.colors[1]).attr('opacity', (r) => r.pn < 100 ? 0.4 : 1);
+    g.append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', rowH).attr('fill', 'transparent')
+      .on('mousemove', (ev, r) => {
+        t.replaceChildren(); const h = document.createElement('div'); h.className = 't'; h.textContent = r.industry + ' · ' + r.verdict; t.appendChild(h);
+        [['Risk index, all loans', idx(r.a)], ['Purchase risk', idx(r.p) + ' (' + int(r.pn) + ' purchase loans)'], ...(W90() ? [['Default 1990s', pct(num(r.rate_1990s)) + ' of ' + int(num(r.loans_1990s))]] : []), ['Default 2000s', pct(num(r.rate_2000s))],
+         ['Default 2005–08', pct(num(r.rate_2005_08))], ['Default 2010s', pct(num(r.rate_2010s))], ['Default 2020–26 so far', pct(num(r.rate_2020s))]]
+          .forEach(([k, v]) => { const l = document.createElement('div'); l.textContent = k + ': ' + v; t.appendChild(l); });
+        placeTip(el, t, ev);
+      }).on('mouseleave', () => { t.style.display = 'none'; });
+    el.style.minHeight = H + 'px';
+  });
+
+  dash.draw('indevalrows', (tb) => {
+    const d = dash.data('indeval'); tb.replaceChildren();
+    if (d.status !== 'ok') return;
+    const k = IS.sort, txt = ['industry', 'verdict'];
+    const rows = d.data.filter((r) => !IS.list || r.list === IS.list).slice().sort((a, b) => {
+      if (txt.includes(k)) return IS.dir * a[k].localeCompare(b[k]);
+      const av = num(a[k]), bv = num(b[k]); if (av == null && bv == null) return 0; if (av == null) return 1; if (bv == null) return -1; return IS.dir * (av - bv);
+    });
+    const money = (v) => v == null ? '—' : '$' + d3.format(',')(Math.round(v / 1000)) + 'K';
+    rows.forEach((r) => {
+      const tr = document.createElement('tr');
+      const cell = (text, cls) => { const td = document.createElement('td'); if (cls) td.className = cls; td.textContent = text; tr.appendChild(td); return td; };
+      cell(r.industry, 'l');
+      const vt = cell('', 'l'); const pill = document.createElement('span'); pill.className = 'pill ' + vClass(r.verdict); pill.textContent = r.verdict; vt.appendChild(pill);
+      [['risk_index', 'n90'], ['risk_index_w90', 'c90']].forEach(([k, c]) => { const ri = num(r[k]); cell(idx(ri), c + (ri == null ? '' : ri <= 0.7 ? ' good' : ri > 1.1 ? ' bad' : '')); });
+      const pr = num(r.purchase_risk); cell(idx(pr), pr == null ? '' : pr <= 0.7 ? 'good' : pr > 1.1 ? 'bad' : '');
+      cell(int(num(r.purchase_loans)), 'hide-narrow');
+      cell(pct(num(r.rate_1990s)), 'hide-narrow c90');
+      cell(pct(num(r.rate_2000s)), 'hide-narrow'); cell(pct(num(r.rate_2005_08)), ''); cell(pct(num(r.rate_2010s)), 'hide-narrow'); cell(pct(num(r.rate_2020s)), 'hide-narrow');
+      cell(money(num(r.median_loan_2010s)), 'hide-narrow');
+      tb.appendChild(tr);
+    });
+  });
+  document.querySelectorAll('.sf-indlist').forEach((s) => { s.value = IS.list; s.addEventListener('change', () => { IS.list = s.value; dash.draw('indevalrows'); }); });
+  document.querySelectorAll('#ind-table th button[data-isort]').forEach((btn) => btn.addEventListener('click', () => {
+    const k = btn.getAttribute('data-isort');
+    if (IS.sort === k) IS.dir = -IS.dir; else { IS.sort = k; IS.dir = (k === 'purchase_loans' || k === 'median_loan_2010s') ? -1 : 1; }
+    document.querySelectorAll('#ind-table th').forEach((th) => th.removeAttribute('aria-sort'));
+    btn.parentElement.setAttribute('aria-sort', IS.dir === 1 ? 'ascending' : 'descending');
+    dash.draw('indevalrows');
+  }));
+
+  // all industries tab
+  const AS = window.SFAll = { sector: '', min: 0, cov: '', q: '', sort: 'safety_index', dir: 1 };
+  const idxColor = (v) => v == null ? 'transparent' : v > 1.25 ? 'var(--cds-chart-status-critical)' : v <= 0.75 ? dash.colors[0] : 'var(--cds-chart-muted)';
+  const hbars = (el, rows, label) => {
+    el.replaceChildren(); const t = tip(el);
+    const W = Math.max(280, el.clientWidth), rowH = 24, top = 22, bottom = 26, H = top + rows.length * rowH + bottom;
+    const svg = d3.select(el).insert('svg', ':first-child').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const short = (s) => s.length > 42 ? s.slice(0, 40) + '…' : s;
+    const meas = svg.append('g'); let lw = 0;
+    rows.forEach((r) => { lw = Math.max(lw, meas.append('text').text(short(label(r))).node().getComputedTextLength()); }); meas.remove();
+    const left = Math.min(lw + 12, W * 0.55), right = 40;
+    const si = (r) => num(pick(r, 'safety_index'));
+    const xmax = Math.max(1.2, d3.max(rows, si) * 1.05);
+    const x = d3.scaleLinear([0, xmax], [left, W - right]);
+    const ticks = x.ticks(Math.max(2, Math.floor((W - left - right) / 60)));
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', x).attr('x2', x).attr('y1', top - 4).attr('y2', H - bottom).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('class', 'tick').attr('x', x).attr('y', H - 8).attr('text-anchor', 'middle').text((v) => d3.format('.1f')(v));
+    const g = svg.append('g').selectAll('g').data(rows).join('g').attr('transform', (r, i) => `translate(0,${top + i * rowH})`);
+    g.append('text').attr('x', left - 8).attr('y', rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').text((r) => short(label(r)));
+    g.append('rect').attr('x', left).attr('y', 5).attr('height', rowH - 10).attr('rx', 3).attr('width', (r) => Math.max(2, x(si(r)) - left)).attr('fill', (r) => idxColor(si(r)));
+    g.append('text').attr('class', 'tick').attr('x', (r) => x(si(r)) + 6).attr('y', rowH / 2).attr('dy', '0.35em').text((r) => idx(si(r)));
+    g.append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', rowH).attr('fill', 'transparent')
+      .on('mousemove', (ev, r) => {
+        t.replaceChildren(); const h = document.createElement('div'); h.className = 't'; h.textContent = r.industry; t.appendChild(h);
+        [['Safety index', idx(si(r))], ['Loans since 2000', int(num(r.loans_total))], ...(W90() ? [['Default 1990s', pct(num(r.rate_1990s)) + ' of ' + int(num(r.loans_1990s))]] : []), ['Default 2000s', pct(num(r.rate_2000s))], ['Default 2005–08', pct(num(r.rate_2005_08))],
+         ['Default 2010s', pct(num(r.rate_2010s))], ['Purchases since 2010', int(num(r.purchases))]].forEach(([k, v]) => { const l = document.createElement('div'); l.textContent = k + ': ' + v; t.appendChild(l); });
+        placeTip(el, t, ev);
+      }).on('mouseleave', () => { t.style.display = 'none'; });
+    svg.append('line').attr('x1', x(1)).attr('x2', x(1)).attr('y1', top - 6).attr('y2', H - bottom).attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+    svg.append('text').attr('x', x(1)).attr('y', top - 10).attr('text-anchor', 'middle').attr('class', 'tick').text('Average');
+    el.style.minHeight = H + 'px';
+  };
+  dash.draw('allsafe', (el) => {
+    const d = dash.data('allind'); if (d.status !== 'ok') { failLine(el, d.status); return; }
+    const rows = d.data.filter((r) => r.coverage === 'Both decades' && num(r.loans_total) >= 1000).sort((a, b) => num(pick(a, 'safety_index')) - num(pick(b, 'safety_index'))).slice(0, 25);
+    hbars(el, rows, (r) => r.industry);
+  });
+  dash.draw('allcommon', (el) => {
+    const d = dash.data('allind'); if (d.status !== 'ok') { failLine(el, d.status); return; }
+    const rows = d.data.slice().sort((a, b) => num(b.loans_total) - num(a.loans_total)).slice(0, 25).sort((a, b) => num(pick(a, 'safety_index')) - num(pick(b, 'safety_index')));
+    hbars(el, rows, (r) => r.industry);
+  });
+  dash.draw('allsector', (sel) => {
+    const d = dash.data('allind');
+    const secs = d.status === 'ok' ? Array.from(new Set(d.data.map((r) => r.sector))).sort() : [];
+    sel.replaceChildren(new Option('All sectors', ''), ...secs.map((s) => new Option(s, s)));
+    sel.value = AS.sector; sel.onchange = () => { AS.sector = sel.value; dash.draw('allrows'); };
+  });
+  dash.draw('allrows', (tb) => {
+    const d = dash.data('allind'); tb.replaceChildren();
+    if (d.status !== 'ok') return;
+    const q = AS.q.trim().toLowerCase(), k = AS.sort, txt = ['industry', 'sector'];
+    const rows = d.data.filter((r) => (!AS.sector || r.sector === AS.sector) && num(r.loans_total) >= AS.min && (!AS.cov || r.coverage === AS.cov) && (!q || r.industry.toLowerCase().includes(q)))
+      .slice().sort((a, b) => {
+        if (txt.includes(k)) return AS.dir * a[k].localeCompare(b[k]);
+        const av = num(a[k]), bv = num(b[k]); if (av == null && bv == null) return 0; if (av == null) return 1; if (bv == null) return -1; return AS.dir * (av - bv);
+      });
+    const money = (v) => v == null ? '—' : v >= 1e6 ? '$' + d3.format('.1f')(v / 1e6) + 'M' : '$' + d3.format(',')(Math.round(v / 1000)) + 'K';
+    rows.forEach((r) => {
+      const tr = document.createElement('tr'); tr.setAttribute('data-key', r.industry); if (r.coverage !== 'Both decades') tr.className = 'small';
+      const cell = (text, cls) => { const td = document.createElement('td'); if (cls) td.className = cls; td.textContent = text; tr.appendChild(td); return td; };
+      cell(r.rank, 'n90'); cell(r.rank_w90, 'c90'); cell(r.industry, 'l wrapcell'); cell(r.sector, 'l hide-narrow'); cell(int(num(r.loans_total)), 'hide-narrow');
+      cell(int(num(r.loans_1990s)), 'hide-narrow c90'); cell(pct(num(r.rate_1990s)), 'c90');
+      cell(pct(num(r.rate_2000s)), ''); cell(pct(num(r.rate_2005_08)), 'hide-narrow'); cell(pct(num(r.rate_2010s)), ''); cell(pct(num(r.rate_2020s)), 'hide-narrow');
+      [['safety_index', 'n90'], ['safety_index_w90', 'c90']].forEach(([k, c]) => {
+        const si = num(r[k]); const td = document.createElement('td'); td.className = c; const wrap = document.createElement('span'); wrap.className = 'ri';
+        const bar = document.createElement('i'); bar.style.width = (si == null ? 0 : Math.min(si, 2.5) / 2.5 * 48) + 'px'; bar.style.background = idxColor(si);
+        const sp = document.createElement('span'); sp.textContent = idx(si); wrap.append(bar, sp); td.appendChild(wrap); tr.appendChild(td);
+      });
+      cell(idx(num(r.recession_index)), 'hide-narrow'); cell(int(num(r.purchases)), 'hide-narrow'); cell(money(num(r.purchase_median_loan)), 'hide-narrow');
+      tb.appendChild(tr);
+    });
+  });
+  document.querySelectorAll('.sf-allsearch').forEach((inp) => { inp.value = ''; inp.addEventListener('input', () => { AS.q = inp.value; dash.draw('allrows'); }); });
+  document.querySelectorAll('.sf-allmin').forEach((s) => { s.value = '0'; s.addEventListener('change', () => { AS.min = Number(s.value); dash.draw('allrows'); }); });
+  document.querySelectorAll('.sf-allcov').forEach((s) => { s.value = ''; s.addEventListener('change', () => { AS.cov = s.value; dash.draw('allrows'); }); });
+  document.querySelectorAll('#all-table th button[data-asort]').forEach((btn) => btn.addEventListener('click', () => {
+    const k = btn.getAttribute('data-asort');
+    if (AS.sort === k) AS.dir = -AS.dir; else { AS.sort = k; AS.dir = ['loans_total', 'loans_1990s', 'purchases', 'purchase_median_loan'].includes(k) ? -1 : 1; }
+    document.querySelectorAll('#all-table th').forEach((th) => th.removeAttribute('aria-sort'));
+    btn.parentElement.setAttribute('aria-sort', AS.dir === 1 ? 'ascending' : 'descending');
+    dash.draw('allrows');
+  }));
+
+  // 1990s switch
+  const PAIRS = ['risk_index', 'total_loans', 'aggregate_rate', 'safety_index', 'rank'];
+  const P90 = ['1991–1999', 'All decades (1991–2026)'];
+  const syncSort = (st, sel, attr) => {
+    const base = st.sort.replace(/_w90$/, '');
+    if (PAIRS.includes(base) && document.querySelector(sel + ' th button[' + attr + '="' + base + '_w90"]')) st.sort = W90() ? base + '_w90' : base;
+    document.querySelectorAll(sel + ' th').forEach((th) => {
+      const b = th.querySelector('button[' + attr + ']'); if (!b) return;
+      if (b.getAttribute(attr) === st.sort) th.setAttribute('aria-sort', st.dir === 1 ? 'ascending' : 'descending'); else th.removeAttribute('aria-sort');
+    });
+  };
+  let was = null;
+  const applyEra = () => {
+    const on = W90();
+    document.querySelectorAll('.sf').forEach((el) => el.classList.toggle('w90', on));
+    document.querySelectorAll('.sf-w90').forEach((i) => { i.checked = on; });
+    document.querySelectorAll('.sf-o90').forEach((o) => { o.hidden = !on; o.disabled = !on; });
+    if (was !== null && on !== was) {
+      if (on && P.p === 'All decades (2000–2026)') P.p = 'All decades (1991–2026)';
+      if (!on && P90.includes(P.p)) P.p = P.p === '1991–1999' ? '2000–2009' : 'All decades (2000–2026)';
+    }
+    if (!on && P90.includes(P.p)) P.p = 'All decades (2000–2026)';
+    was = on;
+    document.querySelectorAll('.sf-period').forEach((sel) => { sel.value = P.p; });
+    syncSort(S, '#brands', 'data-sort'); syncSort(IS, '#ind-table', 'data-isort'); syncSort(AS, '#all-table', 'data-asort');
+  };
+  dash.onData(applyEra);
+  document.querySelectorAll('.sf-w90').forEach((i) => i.addEventListener('change', () => {
+    ERA.v = i.checked;
+    dash.setParams({ with90: i.checked });
+    applyEra();
+    ['base', 'autochart', 'brandrows', 'indrows', 'indchart', 'indevalrows', 'allsafe', 'allcommon', 'allrows'].forEach((n) => dash.draw(n));
+  }));
+})();
+</script>
+
+<script>
+(() => {
+  const { num, pct, int, idx } = window.SFfmt;
+  const failLine = window.SFfail, tip = window.SFtip, placeTip = window.SFplace;
+  const riColor = (v) => v == null ? 'transparent' : v > 1.5 ? 'var(--cds-chart-status-critical)' : v <= 1 ? dash.colors[0] : 'var(--cds-chart-muted)';
+  const tipLines = (t, head, lines) => {
+    t.replaceChildren(); const h = document.createElement('div'); h.className = 't'; h.textContent = head; t.appendChild(h);
+    lines.forEach(([k, v]) => { const l = document.createElement('div'); l.textContent = k + ': ' + v; t.appendChild(l); });
+  };
+
+  // single values, located by data-source / data-field / data-where
+  dash.draw('v504', (el) => {
+    const d = dash.data(el.getAttribute('data-source'));
+    if (d.status !== 'ok') { el.textContent = '—'; return; }
+    const [k, ...rest] = (el.getAttribute('data-where') || '').split('=');
+    const want = decodeURIComponent(rest.join('='));
+    const r = d.data.find((x) => x[k] === want);
+    const v = r ? num(r[el.getAttribute('data-field')]) : null;
+    el.textContent = v == null ? '—' : el.getAttribute('data-fmt') === 'int' ? int(v) : pct(v);
+  });
+
+  // dumbbell: two risk values per row
+  const dumbbell = (el, rows, label, tipFn) => {
+    el.replaceChildren(); const t = tip(el);
+    const W = Math.max(280, el.clientWidth), rowH = 24, top = 22, bottom = 26, H = top + rows.length * rowH + bottom;
+    const svg = d3.select(el).insert('svg', ':first-child').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const short = (s) => s.length > 44 ? s.slice(0, 42) + '…' : s;
+    const meas = svg.append('g'); let lw = 0;
+    rows.forEach((r) => { lw = Math.max(lw, meas.append('text').text(short(label(r))).node().getComputedTextLength()); }); meas.remove();
+    const left = Math.min(lw + 12, W * 0.5), right = 16;
+    const xmax = Math.max(2, d3.max(rows, (r) => Math.max(r.a ?? 0, r.b ?? 0)) * 1.05);
+    const x = d3.scaleLinear([0, xmax], [left, W - right]);
+    const ticks = x.ticks(Math.max(2, Math.floor((W - left - right) / 70)));
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', x).attr('x2', x).attr('y1', top - 4).attr('y2', H - bottom).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('class', 'tick').attr('x', x).attr('y', H - 8).attr('text-anchor', 'middle').text((v) => d3.format('.1f')(v));
+    svg.append('line').attr('x1', x(1)).attr('x2', x(1)).attr('y1', top - 6).attr('y2', H - bottom).attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+    svg.append('text').attr('x', x(1)).attr('y', top - 10).attr('text-anchor', 'middle').attr('class', 'tick').text('Average');
+    const g = svg.append('g').selectAll('g').data(rows).join('g').attr('transform', (r, i) => `translate(0,${top + i * rowH})`);
+    g.append('text').attr('x', left - 8).attr('y', rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').text((r) => short(label(r)));
+    g.filter((r) => r.a != null && r.b != null).append('line').attr('x1', (r) => x(r.a)).attr('x2', (r) => x(r.b)).attr('y1', rowH / 2).attr('y2', rowH / 2)
+      .attr('stroke', 'var(--cds-chart-muted)').attr('stroke-width', 2).attr('stroke-linecap', 'round');
+    g.filter((r) => r.a != null).append('circle').attr('cx', (r) => x(r.a)).attr('cy', rowH / 2).attr('r', 5.5).attr('fill', dash.colors[0]);
+    g.filter((r) => r.b != null).append('circle').attr('cx', (r) => x(r.b)).attr('cy', rowH / 2).attr('r', 5.5).attr('fill', dash.colors[1]);
+    g.append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', rowH).attr('fill', 'transparent')
+      .on('mousemove', (ev, r) => { tipFn(t, r); placeTip(el, t, ev); }).on('mouseleave', () => { t.style.display = 'none'; });
+    el.style.minHeight = H + 'px';
+  };
+
+  dash.draw('sec504chart', (el) => {
+    const d = dash.data('sec504'); if (d.status !== 'ok') { failLine(el, d.status); return; }
+    const rows = d.data.map((r) => ({ ...r, a: num(r.risk_old), b: num(r.risk_new) })).sort((p, q) => p.a - q.a);
+    dumbbell(el, rows, (r) => r.sector, (t, r) => tipLines(t, r.sector, [
+      ['Risk 1991–2009', idx(r.a)], ['Risk 2010–19', idx(r.b)], ['Charge-off 1991–2009', pct(num(r.rate_old)) + ' of ' + int(num(r.loans_old))],
+      ['Charge-off 2005–08', pct(num(r.rate_crisis))], ['Charge-off 2010–19', pct(num(r.rate_new)) + ' of ' + int(num(r.loans_new))]]));
+  });
+
+  const clear = ['Safe in both eras', 'Weak in both eras', 'Safe only recently', 'Worse recently'];
+  dash.draw('ind504chart', (el) => {
+    const d = dash.data('ind504'); if (d.status !== 'ok') { failLine(el, d.status); return; }
+    const rows = d.data.filter((r) => clear.includes(r.verdict)).map((r) => ({ ...r, a: num(r.risk_old), b: num(r.risk_new) })).sort((p, q) => p.a - q.a);
+    dumbbell(el, rows, (r) => r.industry, (t, r) => tipLines(t, r.industry + ' · ' + r.verdict, [
+      ['Risk 1991–2009', idx(r.a)], ['Risk 2010–19', idx(r.b)], ['Charge-off 1991–2009', pct(num(r.rate_old)) + ' of ' + int(num(r.loans_old))],
+      ['Charge-off 2005–08', pct(num(r.rate_crisis))], ['Charge-off 2010–19', pct(num(r.rate_new)) + ' of ' + int(num(r.loans_new))]]));
+  });
+
+  // industry table
+  const I5 = { v: '', q: '', sort: 'risk_all', dir: 1 };
+  const vClass = (v) => v === 'Safe in both eras' ? 'v-strong' : v === 'Weak in both eras' ? 'v-weak' : (v === 'Safe only recently' || v === 'Worse recently') ? 'v-mid' : '';
+  const sorter = (S, txt) => (a, b) => {
+    if (txt.includes(S.sort)) return S.dir * String(a[S.sort]).localeCompare(String(b[S.sort]));
+    const av = num(a[S.sort]), bv = num(b[S.sort]); if (av == null && bv == null) return 0; if (av == null) return 1; if (bv == null) return -1; return S.dir * (av - bv);
+  };
+  const riCell = (tr, v) => {
+    const td = document.createElement('td'); const wrap = document.createElement('span'); wrap.className = 'ri';
+    const bar = document.createElement('i'); bar.style.width = (v == null ? 0 : Math.min(v, 2.5) / 2.5 * 48) + 'px'; bar.style.background = riColor(v);
+    const s = document.createElement('span'); s.textContent = idx(v); wrap.append(bar, s); td.appendChild(wrap); tr.appendChild(td);
+  };
+  dash.draw('ind504rows', (tb) => {
+    const d = dash.data('ind504'); tb.replaceChildren(); if (d.status !== 'ok') return;
+    const q = I5.q.trim().toLowerCase();
+    d.data.filter((r) => (!I5.v || r.verdict === I5.v) && (!q || r.industry.toLowerCase().includes(q))).slice().sort(sorter(I5, ['industry', 'verdict'])).forEach((r) => {
+      const tr = document.createElement('tr'); tr.setAttribute('data-key', r.industry);
+      const cell = (text, cls) => { const td = document.createElement('td'); if (cls) td.className = cls; td.textContent = text; tr.appendChild(td); return td; };
+      cell(r.rank, ''); cell(r.industry, 'l wrapcell');
+      const vt = cell('', 'l'); const pill = document.createElement('span'); pill.className = 'pill ' + vClass(r.verdict); pill.textContent = r.verdict; vt.appendChild(pill);
+      cell(int(num(r.loans_total)), 'hide-narrow'); cell(pct(num(r.rate_old)), ''); cell(pct(num(r.rate_crisis)), 'hide-narrow'); cell(pct(num(r.rate_new)), '');
+      cell(idx(num(r.risk_old)), 'hide-narrow'); cell(idx(num(r.risk_new)), 'hide-narrow'); riCell(tr, num(r.risk_all));
+      tb.appendChild(tr);
+    });
+  });
+  document.querySelectorAll('.sf-v504').forEach((s) => { s.value = ''; s.addEventListener('change', () => { I5.v = s.value; dash.draw('ind504rows'); }); });
+  document.querySelectorAll('.sf-i504search').forEach((s) => { s.value = ''; s.addEventListener('input', () => { I5.q = s.value; dash.draw('ind504rows'); }); });
+  document.querySelectorAll('#ind504-table th button[data-i5]').forEach((btn) => btn.addEventListener('click', () => {
+    const k = btn.getAttribute('data-i5');
+    if (I5.sort === k) I5.dir = -I5.dir; else { I5.sort = k; I5.dir = k === 'loans_total' ? -1 : 1; }
+    document.querySelectorAll('#ind504-table th').forEach((th) => th.removeAttribute('aria-sort'));
+    btn.parentElement.setAttribute('aria-sort', I5.dir === 1 ? 'ascending' : 'descending');
+    dash.draw('ind504rows');
+  }));
+
+  // brand chart
+  dash.draw('brand504chart', (el) => {
+    const d = dash.data('brand504'); if (d.status !== 'ok') { failLine(el, d.status); return; }
+    const rows = d.data.filter((r) => num(r.loans_total) >= 100).map((r) => ({ ...r, ri: num(r.risk_index) })).sort((a, b) => a.ri - b.ri);
+    el.replaceChildren(); const t = tip(el);
+    const W = Math.max(280, el.clientWidth), rowH = 24, top = 22, bottom = 26, H = top + rows.length * rowH + bottom;
+    const svg = d3.select(el).insert('svg', ':first-child').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const meas = svg.append('g'); let lw = 0;
+    rows.forEach((r) => { lw = Math.max(lw, meas.append('text').text(r.brand).node().getComputedTextLength()); }); meas.remove();
+    const left = Math.min(lw + 12, W * 0.45), right = 44;
+    const x = d3.scaleLinear([0, Math.max(2, d3.max(rows, (r) => r.ri) * 1.05)], [left, W - right]);
+    const ticks = x.ticks(Math.max(2, Math.floor((W - left - right) / 70)));
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', x).attr('x2', x).attr('y1', top - 4).attr('y2', H - bottom).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('class', 'tick').attr('x', x).attr('y', H - 8).attr('text-anchor', 'middle').text((v) => d3.format('.1f')(v));
+    const g = svg.append('g').selectAll('g').data(rows).join('g').attr('transform', (r, i) => `translate(0,${top + i * rowH})`);
+    g.append('text').attr('x', left - 8).attr('y', rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').text((r) => r.brand);
+    g.append('rect').attr('x', left).attr('y', 5).attr('height', rowH - 10).attr('rx', 3).attr('width', (r) => Math.max(2, x(r.ri) - left)).attr('fill', (r) => riColor(r.ri));
+    g.append('text').attr('class', 'tick').attr('x', (r) => Math.max(left + 2, x(r.ri)) + 6).attr('y', rowH / 2).attr('dy', '0.35em').text((r) => idx(r.ri));
+    g.append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', rowH).attr('fill', 'transparent')
+      .on('mousemove', (ev, r) => {
+        tipLines(t, r.brand + ' · ' + r.category, [['Risk index', idx(r.ri)], ['Charge-offs', int(num(r.charge_offs)) + ' of ' + int(num(r.loans_total))],
+          ['Charge-off 1991–2009', pct(num(r.rate_old))], ['Charge-off 2005–08', pct(num(r.rate_crisis))], ['Charge-off 2010–19', pct(num(r.rate_new))]]);
+        placeTip(el, t, ev);
+      }).on('mouseleave', () => { t.style.display = 'none'; });
+    svg.append('line').attr('x1', x(1)).attr('x2', x(1)).attr('y1', top - 6).attr('y2', H - bottom).attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+    svg.append('text').attr('x', x(1)).attr('y', top - 10).attr('text-anchor', 'middle').attr('class', 'tick').text('Average');
+    el.style.minHeight = H + 'px';
+  });
+
+  // brand table
+  const B5 = { cat: '', q: '', sort: 'risk_index', dir: 1 };
+  dash.draw('b504cat', (sel) => {
+    const d = dash.data('brand504');
+    const cats = d.status === 'ok' ? Array.from(new Set(d.data.map((r) => r.category))).sort() : [];
+    sel.replaceChildren(new Option('All categories', ''), ...cats.map((c) => new Option(c, c)));
+    sel.value = B5.cat; sel.onchange = () => { B5.cat = sel.value; dash.draw('brand504rows'); };
+  });
+  dash.draw('brand504rows', (tb) => {
+    const d = dash.data('brand504'); tb.replaceChildren(); if (d.status !== 'ok') return;
+    const q = B5.q.trim().toLowerCase();
+    d.data.filter((r) => (!B5.cat || r.category === B5.cat) && (!q || (r.brand + ' ' + r.category).toLowerCase().includes(q))).slice().sort(sorter(B5, ['brand', 'category'])).forEach((r) => {
+      const tr = document.createElement('tr'); tr.setAttribute('data-key', r.brand); if (r.sample === 'Small') tr.className = 'small';
+      const cell = (text, cls) => { const td = document.createElement('td'); if (cls) td.className = cls; td.textContent = text; tr.appendChild(td); };
+      cell(r.brand, 'l'); cell(r.category, 'l hide-narrow'); cell(int(num(r.loans_old)), 'hide-narrow'); cell(pct(num(r.rate_old)), '');
+      cell(pct(num(r.rate_crisis)), 'hide-narrow'); cell(int(num(r.loans_new)), 'hide-narrow'); cell(pct(num(r.rate_new)), '');
+      cell(int(num(r.loans_total)), 'hide-narrow'); cell(int(num(r.charge_offs)), 'hide-narrow'); cell(pct(num(r.upper95)), 'hide-narrow');
+      riCell(tr, num(r.risk_index));
+      tb.appendChild(tr);
+    });
+  });
+  document.querySelectorAll('.sf-b504search').forEach((s) => { s.value = ''; s.addEventListener('input', () => { B5.q = s.value; dash.draw('brand504rows'); }); });
+  document.querySelectorAll('#brand504-table th button[data-b5]').forEach((btn) => btn.addEventListener('click', () => {
+    const k = btn.getAttribute('data-b5');
+    if (B5.sort === k) B5.dir = -B5.dir; else { B5.sort = k; B5.dir = ['loans_old', 'loans_new', 'loans_total'].includes(k) ? -1 : 1; }
+    document.querySelectorAll('#brand504-table th').forEach((th) => th.removeAttribute('aria-sort'));
+    btn.parentElement.setAttribute('aria-sort', B5.dir === 1 ? 'ascending' : 'descending');
+    dash.draw('brand504rows');
+  }));
+})();
+</script>

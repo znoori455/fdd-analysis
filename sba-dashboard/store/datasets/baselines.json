@@ -1,0 +1,14 @@
+{
+  "description": "Charge-off rate for every SBA 7(a) loan in each period, used as the average for the risk index; includes FY1991–1999 loans, all and industry-coded only.",
+  "fixed": true,
+  "source": {
+    "kind": "file",
+    "name": "baselines.csv",
+    "url": "/_blob/aa9f3df09e9b7dfa7b6eec374c2dcbe7"
+  },
+  "title": "All-loan default baselines",
+  "updated": {
+    "at": "2026-11-02T20:45:00-08:00",
+    "by": "Claude, from SBA FOIA files supplied by the user (FY1991–1999 file added)"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "description": "Default rates for franchised and independent SBA 7(a) borrowers by NAICS industry, for each decade from 1991 and for all decades combined, with and without 1990s loans.",
+  "fixed": true,
+  "source": {
+    "kind": "file",
+    "name": "industries.csv",
+    "url": "/_blob/da4748f107f8b03cd3b07895ed270c98"
+  },
+  "title": "Franchise vs independent by industry",
+  "updated": {
+    "at": "2026-11-02T20:45:00-08:00",
+    "by": "Claude, from SBA FOIA files supplied by the user (FY1991–1999 file added)"
+  }
+}

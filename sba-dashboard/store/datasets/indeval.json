@@ -1,0 +1,14 @@
+{
+  "description": "Risk index, purchase risk and default rates by decade for SBA 7(a) loans in each NAICS industry you listed, plus comparison industries, from the FY1991–present SBA FOIA files (risk_index_w90 includes 1990s loans).",
+  "fixed": true,
+  "source": {
+    "kind": "file",
+    "name": "industry_eval.csv",
+    "url": "/_blob/079d297908bad19283ab543281ac9e49"
+  },
+  "title": "Industry scorecard",
+  "updated": {
+    "at": "2026-11-02T20:45:00-08:00",
+    "by": "Claude, from SBA FOIA files supplied by the user (FY1991–1999 file added)"
+  }
+}

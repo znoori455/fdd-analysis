@@ -1,0 +1,14 @@
+{
+  "description": "65 franchise brands with 40+ funded SBA 504 loans approved 1991–2019, matched by name: loans, charge-offs and rates by era, risk index and a 95% upper bound on the charge-off rate.",
+  "fixed": true,
+  "source": {
+    "kind": "file",
+    "name": "brand504.csv",
+    "url": "/_blob/f33e65920eafefe72078b03359b11663"
+  },
+  "title": "504 franchise brand outcomes",
+  "updated": {
+    "at": "2026-11-02T20:40:00-08:00",
+    "by": "Claude, from SBA 504 FOIA files supplied by the user"
+  }
+}
