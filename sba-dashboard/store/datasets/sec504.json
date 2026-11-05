@@ -1,0 +1,14 @@
+{
+  "description": "Charge-off rates and vintage-adjusted risk index by NAICS sector for SBA 504 loans approved 1991–2009, 2005–2008 and 2010–2019.",
+  "fixed": true,
+  "source": {
+    "kind": "file",
+    "name": "sec504.csv",
+    "url": "/_blob/5e7a557fb87572d66b2e98329686af17"
+  },
+  "title": "504 risk by sector",
+  "updated": {
+    "at": "2026-11-02T20:40:00-08:00",
+    "by": "Claude, from SBA 504 FOIA files supplied by the user"
+  }
+}

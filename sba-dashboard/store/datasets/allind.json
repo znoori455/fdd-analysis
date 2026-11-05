@@ -1,0 +1,14 @@
+{
+  "description": "390 industries with at least 400 resolved SBA 7(a) loans from 2000–2019: default rates by decade, safety and recession indexes, and purchase counts, plus FY1991–1999 loans and a safety index that includes them (_w90 columns).",
+  "fixed": true,
+  "source": {
+    "kind": "file",
+    "name": "all_industries.csv",
+    "url": "/_blob/4811a4087ae9c7355ce83a530648925e"
+  },
+  "title": "All industries safety ranking",
+  "updated": {
+    "at": "2026-11-02T20:45:00-08:00",
+    "by": "Claude, from SBA FOIA files supplied by the user (FY1991–1999 file added)"
+  }
+}

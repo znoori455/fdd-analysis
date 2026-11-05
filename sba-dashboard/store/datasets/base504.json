@@ -1,0 +1,14 @@
+{
+  "description": "Charge-off rate for all funded SBA 504 loans approved 1991–2009, 2005–2008 and 2010–2019, from the SBA 504 FOIA files (statuses as of Sept 30, 2026).",
+  "fixed": true,
+  "source": {
+    "kind": "file",
+    "name": "base504.csv",
+    "url": "/_blob/7349fc0e3bde264b5783b1e34c8c9969"
+  },
+  "title": "504 charge-off baselines",
+  "updated": {
+    "at": "2026-11-02T20:40:00-08:00",
+    "by": "Claude, from SBA 504 FOIA files supplied by the user"
+  }
+}

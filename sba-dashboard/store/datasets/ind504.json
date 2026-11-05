@@ -1,0 +1,14 @@
+{
+  "description": "90 industries with 300+ funded SBA 504 loans approved 1991–2019: charge-off rates by era, risk index by era and overall, and a pattern label comparing the two eras.",
+  "fixed": true,
+  "source": {
+    "kind": "file",
+    "name": "ind504.csv",
+    "url": "/_blob/392ab4c10953b25394609f1e3179c8a7"
+  },
+  "title": "504 industry outcomes",
+  "updated": {
+    "at": "2026-11-02T20:40:00-08:00",
+    "by": "Claude, from SBA 504 FOIA files supplied by the user"
+  }
+}

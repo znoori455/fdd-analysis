@@ -1,0 +1,14 @@
+{
+  "description": "Default rates for change-of-ownership SBA 7(a) loans by loan size, FY2010–2019 (resolved) and FY2020–2023 (to date).",
+  "fixed": true,
+  "source": {
+    "kind": "file",
+    "name": "sizes.csv",
+    "url": "/_blob/c8fe3d65d1b2ec1beb81ef46b92d4225"
+  },
+  "title": "Acquisition loan size outcomes",
+  "updated": {
+    "at": "2026-11-01T20:40:00-08:00",
+    "by": "Claude, from SBA FOIA files supplied by the user"
+  }
+}
