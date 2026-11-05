@@ -1,0 +1,5 @@
+# Raw FOIA CSVs are kept locally; the gzipped copies are committed instead
+SBA-Data/FOIA_7a_*.csv
+!SBA-Data/FOIA_7a_*.csv.gz
+
+.DS_Store
